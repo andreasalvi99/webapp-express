@@ -46,6 +46,13 @@ app.get("/:id", (req, res) => {
   });
 });
 
+//^ NOT FOUND, SERVER ERROR
+
+const errorHandlers = require("./middlewares/errors");
+
+app.use(errorHandlers.error404);
+app.use(errorHandlers.error500);
+
 app.listen(port, () => {
   console.log(`Server online on ${url}${port}`);
 });
