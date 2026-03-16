@@ -1,0 +1,26 @@
+{
+  "name": "webapp-express",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/andreasalvi99/webapp-express#readme",
+  "bugs": {
+    "url": "https://github.com/andreasalvi99/webapp-express/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andreasalvi99/webapp-express.git"
+  },
+  "license": "ISC",
+  "author": "Andrea Salvi",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "watch": "node --watch app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "mysql2": "^3.20.0"
+  }
+}
