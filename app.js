@@ -18,11 +18,19 @@ app.get("/", (req, res) => {
       results: results,
     });
   });
+});
 
-  //   res.json({
-  //     success: true,
-  //     results: results,
-  //   });
+app.get("/:id", (req, res) => {
+  const { id } = req.params;
+  const filmSQL = `SELECT * FROM movies.movies WHERE id = ?`;
+  connection.query(filmSQL, [id], (err, results) => {
+    if (err) return res.status(500).json({ error: "Database query failed" });
+    const film = results[0];
+    res.json({
+      success: true,
+      results: film,
+    });
+  });
 });
 
 app.listen(port, () => {
