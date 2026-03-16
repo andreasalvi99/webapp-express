@@ -4,9 +4,12 @@ function index(req, res) {
   const filmsSQL = `SELECT * FROM movies.movies`;
   connection.query(filmsSQL, (err, results) => {
     if (err) return res.status(500).json({ error: "Database query failed" });
+    const films = results.map((film) => {
+      return { ...film, image: pathCrafter(film.image) };
+    });
     res.json({
       success: true,
-      results: results,
+      results: films,
     });
   });
 }
