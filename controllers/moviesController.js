@@ -27,6 +27,7 @@ function show(req, res) {
     connection.query(reviewSQL, [id], (err, results) => {
       if (err) return res.status(500).json({ error: "Databasequery failed" });
       film.reviews = results;
+      film.image = pathCrafter(film.image);
       res.json({
         success: true,
         results: film,
@@ -36,3 +37,7 @@ function show(req, res) {
 }
 
 module.exports = { index, show };
+
+function pathCrafter(image) {
+  return `${process.env.APP_URL}:${process.env.APP_PORT}/img/${image}`;
+}

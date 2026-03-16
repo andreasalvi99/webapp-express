@@ -1,7 +1,5 @@
 const express = require("express");
 const app = express();
-const port = 3000;
-const url = "http://localhost:";
 const moviesRouter = require("./routers/moviesRouter");
 
 //^ MIDDLEWARES
@@ -19,6 +17,6 @@ const errorHandlers = require("./middlewares/errors");
 app.use(errorHandlers.error404);
 app.use(errorHandlers.error500);
 
-app.listen(port, () => {
-  console.log(`Server online on ${url}${port}`);
+app.listen(`${process.env.APP_PORT}`, () => {
+  console.log(`Server online on ${process.env.APP_URL}${process.env.APP_PORT}`);
 });
