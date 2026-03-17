@@ -1,11 +1,13 @@
 const express = require("express");
 const app = express();
 const moviesRouter = require("./routers/moviesRouter");
+const cors = require("cors");
 
 //^ MIDDLEWARES
 
 app.use(express.static("public"));
 app.use(express.json());
+app.use(cors({ origin: "http://localhost:5173" }));
 
 //^ ROUTES
 app.use("/movies", moviesRouter);
