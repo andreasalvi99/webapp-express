@@ -42,5 +42,5 @@ function show(req, res) {
 module.exports = { index, show };
 
 function pathCrafter(image) {
-  return `${process.env.APP_URL}:${process.env.APP_PORT}/img/${image}`;
+  return `${process.env.APP_URL}${process.env.APP_PORT}/img/${image}`;
 }
