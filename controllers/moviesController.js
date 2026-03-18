@@ -1,7 +1,15 @@
 const connection = require("../database/movies");
 
 function index(req, res) {
-  const filmsSQL = `SELECT * FROM movies.movies`;
+  const filmsSQL = `SELECT 
+movies.id,
+movies.title,
+movies.image,
+AVG(vote) AS rating
+FROM movies
+JOIN reviews
+ON movies.id = reviews.movie_id
+group by movies.id`;
   connection.query(filmsSQL, (err, results) => {
     if (err) return res.status(500).json({ error: "Database query failed" });
     const films = results.map((film) => {
