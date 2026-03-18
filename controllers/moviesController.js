@@ -5,6 +5,7 @@ function index(req, res) {
 movies.id,
 movies.title,
 movies.image,
+movies.abstract AS description,
 AVG(vote) AS rating
 FROM movies
 JOIN reviews
