@@ -35,7 +35,7 @@ function show(req, res) {
 
     //^ Query per avere le reviews
 
-    const reviewSQL = `SELECT * FROM movies.reviews WHERE movie_id = ?`;
+    const reviewSQL = `SELECT * FROM movies.reviews WHERE movie_id = ? ORDER BY created_at DESC`;
     connection.query(reviewSQL, [id], (err, results) => {
       if (err) return res.status(500).json({ error: "Databasequery failed" });
       film.reviews = results;
@@ -48,7 +48,19 @@ function show(req, res) {
   });
 }
 
-module.exports = { index, show };
+function storeReview(req, res) {
+  const { id } = req.params;
+  const { name, vote, text } = req.body;
+
+  const storeReviewSQL = `INSERT INTO movies.reviews (movie_id, name, vote, text) VALUES (?,?,?,?);`;
+
+  connection.query(storeReviewSQL, [id, name, vote, text], (err, results) => {
+    if (err) return res.status(500).json({ error: "Database query failed" });
+    res.send(results.insertId);
+  });
+}
+
+module.exports = { index, show, storeReview };
 
 function pathCrafter(image) {
   return `${process.env.APP_URL}${process.env.APP_PORT}/img/${image}`;
